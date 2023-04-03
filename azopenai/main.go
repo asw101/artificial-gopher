@@ -13,7 +13,7 @@ import (
 	"github.com/element-of-surprise/azopenai/clients/chat"
 )
 
-// Completions is a sample request to the completions API
+// Completions is a sample request to the Completions API
 func Completions() error {
 	c, err := clientFromEnv()
 	if err != nil {
