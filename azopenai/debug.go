@@ -7,3 +7,6 @@ func main() {
 		log.Fatal(err)
 	}
 }
+
+// cp magefile.go debug_magefile.go
+// remove '//go:build mage' from the top of the file
