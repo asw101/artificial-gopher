@@ -21,7 +21,7 @@ func Completions() error {
 	}
 	client := c.Completions()
 	ctx := context.Background()
-	prompts := []string{"The capital of Tennessee is"}
+	prompts := []string{"Once upon a time"}
 	resp, err := client.Call(ctx, prompts)
 	if err != nil {
 		return err
@@ -40,7 +40,12 @@ func Chat() error {
 	ctx := context.Background()
 	messages := []chat.SendMsg{
 		{
-			Content: "Is Go better than Python for the use case of distributed systems?",
+			Role:    "system",
+			Content: "You are a helpful assistant.",
+		},
+		{
+			Role:    "user",
+			Content: "Does Azure OpenAI support customer managed keys?",
 		},
 	}
 	resp, err := client.Call(ctx, messages)
@@ -59,7 +64,7 @@ func Embeddings() error {
 	}
 	client := c.Embeddings()
 	ctx := context.Background()
-	text := []string{"Go is the best language"}
+	text := []string{"The food was delicious and the waiter..."}
 	resp, err := client.Call(ctx, text)
 	if err != nil {
 		return err
