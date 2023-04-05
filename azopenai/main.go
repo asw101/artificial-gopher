@@ -8,5 +8,4 @@ func main() {
 	}
 }
 
-// cp magefile.go debug_magefile.go
-// remove '//go:build mage' from the top of the file
+// remove '//go:build mage' from the top of magefile.go
