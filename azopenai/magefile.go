@@ -15,7 +15,7 @@ import (
 
 // Completions is a sample request to the Completions API
 func Completions() error {
-	c, err := clientFromEnv()
+	c, err := clientFromEnv("text-davinci-003")
 	if err != nil {
 		return err
 	}
@@ -32,7 +32,7 @@ func Completions() error {
 
 // Chat is a sample request to the Chat API
 func Chat() error {
-	c, err := clientFromEnv()
+	c, err := clientFromEnv("gpt-35-turbo")
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func Chat() error {
 
 // Embeddings is a sample request to the Embeddings API
 func Embeddings() error {
-	c, err := clientFromEnv()
+	c, err := clientFromEnv("text-embedding-ada-002")
 	if err != nil {
 		return err
 	}
@@ -73,7 +73,7 @@ func Embeddings() error {
 	return nil
 }
 
-func clientFromEnv() (*azopenai.Client, error) {
+func clientFromEnv(deploymentName string) (*azopenai.Client, error) {
 	apiKey := os.Getenv("API_KEY")
 	if apiKey == "" {
 		return nil, errors.New("API_KEY is not set")
@@ -82,7 +82,9 @@ func clientFromEnv() (*azopenai.Client, error) {
 	if resourceName == "" {
 		return nil, errors.New("RESOURCE_NAME is not set")
 	}
-	deploymentName := os.Getenv("DEPLOYMENT_NAME")
+	if deploymentName == "" {
+		deploymentName = os.Getenv("DEPLOYMENT_NAME")
+	}
 	if deploymentName == "" {
 		return nil, errors.New("DEPLOYMENT_NAME is not set")
 	}
@@ -99,5 +101,5 @@ func Env() {
 export RESOURCE_NAME=''
 export DEPLOYMENT_NAME=''
 `
-	fmt.Printf(txt)
+	fmt.Print(txt)
 }
