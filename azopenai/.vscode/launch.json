@@ -11,6 +11,7 @@
             "mode": "auto",
             "program": "${workspaceFolder}",
             "envFile": "${workspaceFolder}/_/.env",
+            "buildFlags": "-tags=mage,debug"
         }
     ]
 }
