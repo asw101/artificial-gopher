@@ -73,7 +73,7 @@ func Embeddings() error {
 	return nil
 }
 
-func clientFromEnv(deploymentName string) (*azopenai.Client, error) {
+func clientFromEnv(deploymentID string) (*azopenai.Client, error) {
 	apiKey := os.Getenv("API_KEY")
 	if apiKey == "" {
 		return nil, errors.New("API_KEY is not set")
@@ -82,13 +82,13 @@ func clientFromEnv(deploymentName string) (*azopenai.Client, error) {
 	if resourceName == "" {
 		return nil, errors.New("RESOURCE_NAME is not set")
 	}
-	if deploymentName == "" {
-		deploymentName = os.Getenv("DEPLOYMENT_NAME")
+	if deploymentID == "" {
+		deploymentID = os.Getenv("DEPLOYMENT_ID")
 	}
-	if deploymentName == "" {
-		return nil, errors.New("DEPLOYMENT_NAME is not set")
+	if deploymentID == "" {
+		return nil, errors.New("DEPLOYMENT_ID is not set")
 	}
-	client, err := azopenai.New(resourceName, deploymentName, auth.Authorizer{ApiKey: apiKey})
+	client, err := azopenai.New(resourceName, deploymentID, auth.Authorizer{ApiKey: apiKey})
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func clientFromEnv(deploymentName string) (*azopenai.Client, error) {
 func Env() {
 	txt := `export API_KEY=''
 export RESOURCE_NAME=''
-export DEPLOYMENT_NAME=''
+export DEPLOYMENT_ID=''
 `
 	fmt.Print(txt)
 }
